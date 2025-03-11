@@ -23,3 +23,24 @@
 			Console.WriteLine("\t8. Edit archive");
 			Console.WriteLine("\t9. Show obligors list by author");
 
+public class Source
+{
+	public string Name { get; set; }
+	public string WritingYear { get; set; }
+}
+public class Book:Source
+{
+	public string Author { get; set; }
+	public string Genre { get; set; }
+	public string Description { get; set; }
+}
+
+public class Magazine : Source
+{
+	public int Id { get; set; }
+}
+
+public class Newspaper : Source
+{
+	public string Theme { get; set; }
+}
