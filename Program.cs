@@ -11,12 +11,6 @@
 	Корекція: видалення зведень про газети за певний рік
 	Табличний звіт: список боржників книг певного автора*/
 
-namespace Library
-{
-    internal class Program
-    {
-        static void Main(string[] args)
-        {
             Console.WriteLine("--------- Welcome to the Library ---------");
 			Console.WriteLine("\tMENU:");
 			Console.WriteLine("\t1. Add new item");
@@ -28,6 +22,4 @@ namespace Library
 			Console.WriteLine("\t7. Category info");
 			Console.WriteLine("\t8. Edit archive");
 			Console.WriteLine("\t9. Show obligors list by author");
-        }
-    }
-}
+
