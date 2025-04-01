@@ -11,6 +11,8 @@
 	Корекція: видалення зведень про газети за певний рік
 	Табличний звіт: список боржників книг певного автора*/
 
+using System.Text.Json;
+
 Console.WriteLine("--------- Welcome to the Library ---------");
 Console.WriteLine("\tMENU:");
 Console.WriteLine("\t1. Add new item");
@@ -20,10 +22,10 @@ Console.WriteLine("\t4. Sort all items");
 Console.WriteLine("\t5. Search item");
 Console.WriteLine("\t6. Show item info");
 Console.WriteLine("\t7. Category info");
-Console.WriteLine("\t8. Edit archive");
-Console.WriteLine("\t9. Show obligors list by author");
+Console.WriteLine("\t8. Save Library to file");
+Console.WriteLine("\t9. Load Library from file");
 
-Source item = new();
+List<Source> books = new();
 
 while (true)
 {
@@ -33,19 +35,35 @@ while (true)
 	switch (choice)
 	{
 		case 1:
+			var newBook = new Book();
+			
 			Console.Write("Enter item title: ");
-			item.Name = Console.ReadLine();
+            newBook.Name = Console.ReadLine();
             Console.Write("Enter item type: ");
-            item.Type = Console.ReadLine();
+            newBook.Type = Console.ReadLine();
             Console.Write("Enter writing year: ");
-			item.WritingYear = Convert.ToInt32(Console.ReadLine());
-		break;
+            newBook.WritingYear = Convert.ToInt32(Console.ReadLine());
+
+			books.Add(newBook);
+			break;
 		case 2:
-			Console.WriteLine("------Library--------");
-            Console.WriteLine($"Type: {item.Type}");
-            Console.WriteLine($"Name: {item.Name}");
-			Console.WriteLine($"Writing Year: {item.WritingYear}");
-		break;
+			foreach (var item in books)
+			{
+				Console.WriteLine("------Library--------");
+				Console.WriteLine($"Type: {item.Type}");
+				Console.WriteLine($"Name: {item.Name}");
+				Console.WriteLine($"Writing Year: {item.WritingYear}");
+			}
+			break;
+		case 8:
+			string JsonToSave = JsonSerializer.Serialize(books);
+			Console.WriteLine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop));
+			File.WriteAllText($"{Environment.GetFolderPath(Environment.SpecialFolder.Desktop)}/books_db.json", JsonToSave);
+			break; 
+		case 9:
+			string jsonToLoad = File.ReadAllText($"{Environment.GetFolderPath(Environment.SpecialFolder.Desktop)}/books_db.json");
+			books = JsonSerializer.Deserialize<List<Source>>(jsonToLoad);
+            break;
 	}
 }
 public class Source
