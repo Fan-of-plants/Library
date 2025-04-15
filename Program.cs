@@ -57,8 +57,38 @@ while (true)
 
 			books.Add(newBook);
 			break;
-		
-		case 2:
+
+        case 2:
+            var newMagazine = new Magazine();
+
+            Console.Write("Enter item title: ");
+            newMagazine.Name = Console.ReadLine();
+            Console.Write("Enter item type: ");
+            newMagazine.Type = Console.ReadLine();
+            Console.Write("Enter writing year: ");
+            newMagazine.WritingYear = Convert.ToInt32(Console.ReadLine());
+            Console.Write("Enter magazine ID: ");
+            newMagazine.Id = Convert.ToInt32(Console.ReadLine());
+
+            magazines.Add(newMagazine);
+            break;
+
+        case 3:
+            var newNewspaper = new Newspaper();
+
+            Console.Write("Enter item title: ");
+            newNewspaper.Name = Console.ReadLine();
+            Console.Write("Enter item type: ");
+            newNewspaper.Type = Console.ReadLine();
+            Console.Write("Enter writing year: ");
+            newNewspaper.WritingYear = Convert.ToInt32(Console.ReadLine());
+            Console.Write("Enter magazine ID: ");
+            newNewspaper.Theme = Console.ReadLine();
+
+            newspapers.Add(newNewspaper);
+            break;
+
+        case 4:
 			foreach (var item in books)
 			{
 				Console.WriteLine("------Library--------");
@@ -67,8 +97,26 @@ while (true)
 				Console.WriteLine($"Writing Year: {item.WritingYear}");
 			}
 			break;
-        
-		case 3:
+            
+            foreach (var item in magazines)
+            {
+                Console.WriteLine("------Library--------");
+                Console.WriteLine($"Type: {item.Type}");
+                Console.WriteLine($"Name: {item.Name}");
+                Console.WriteLine($"Writing Year: {item.WritingYear}");
+            }
+            break;
+
+            foreach (var item in newspapers)
+            {
+                Console.WriteLine("------Library--------");
+                Console.WriteLine($"Type: {item.Type}");
+                Console.WriteLine($"Name: {item.Name}");
+                Console.WriteLine($"Writing Year: {item.WritingYear}");
+            }
+            break;
+
+        case 5:
             for (int i = 0; i < books.Count; ++i)
                 Console.WriteLine($"[{i}] Product: " + books[i].Name);
 
@@ -85,7 +133,7 @@ while (true)
             Console.WriteLine("Product deleted successfully!");
             break;
 
-        case 5:
+        case 7:
             Console.Write("Enter product name to find: ");
             string nameToFind = Console.ReadLine().Trim();
 
@@ -100,7 +148,7 @@ while (true)
             foundItem.Show();
             break;
 
-        case 7:
+        case 11:
 			string JsonToSave = JsonSerializer.Serialize(books);
 			Console.WriteLine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop));
 			File.WriteAllText($"{Environment.GetFolderPath(Environment.SpecialFolder.Desktop)}/books_db.json", JsonToSave);
@@ -114,7 +162,7 @@ while (true)
             File.WriteAllText($"{Environment.GetFolderPath(Environment.SpecialFolder.Desktop)}/newspapers_db.json", JsonToSave);
             break; 
 		
-		case 8:
+		case 12:
 			string jsonToLoad = File.ReadAllText($"{Environment.GetFolderPath(Environment.SpecialFolder.Desktop)}/books_db.json");
 			books = JsonSerializer.Deserialize<List<Book>>(jsonToLoad);
 
@@ -122,52 +170,4 @@ while (true)
             magazines = JsonSerializer.Deserialize<List<Magazine>>(jsonToLoad2);
             break;
 	}
-}
-public class Source
-{
-	public string Name { get; set; }
-	public int WritingYear { get; set; }
-	public string Type { get; set; }
-   
-}
-public class Book:Source
-{
-	public string Author { get; set; }
-	public string Genre { get; set; }
-	public string Description { get; set; }
-    public void Show()
-    {
-        Console.WriteLine("------- Product ---------");
-        Console.WriteLine($"Name: {this.Name}");
-        Console.WriteLine($"Category: {this.Type}");
-        Console.WriteLine($"Writing Year: {this.WritingYear}");
-        Console.WriteLine($"Author: {this.Author}");
-        Console.WriteLine($"Genre: {this.Genre}");
-    }
-}
-
-public class Magazine : Source
-{
-	public int Id { get; set; }
-    public void Show()
-    {
-        Console.WriteLine("------- Product ---------");
-        Console.WriteLine($"Name: {this.Name}");
-        Console.WriteLine($"Category: {this.Type}");
-        Console.WriteLine($"Writing Year: {this.WritingYear}");
-        Console.WriteLine($"Id: {this.Id}");
-    }
-}
-
-public class Newspaper : Source
-{
-	public string Theme { get; set; }
-    public void Show()
-    {
-        Console.WriteLine("------- Product ---------");
-        Console.WriteLine($"Name: {this.Name}");
-        Console.WriteLine($"Category: {this.Type}");
-        Console.WriteLine($"Writing Year: {this.WritingYear}");
-        Console.WriteLine($"Theme: {this.Theme}");
-    }
 }
