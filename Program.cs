@@ -11,6 +11,7 @@
 	Корекція: видалення зведень про газети за певний рік
 	Табличний звіт: список боржників книг певного автора*/
 
+using LibraryApp;
 using System.Text.Json;
 
 Console.WriteLine("--------- Welcome to the Library ---------");
@@ -30,6 +31,8 @@ Console.WriteLine("\t11. Save Library to file");
 Console.WriteLine("\t12. Load Library from file");
 
 
+Library library = new();
+
 while (true)
 {
 	Console.Write("Enter your choice: ");
@@ -42,35 +45,35 @@ while (true)
             break;
         
 		case 1:
-			
+			library.AddBook();
 			break;
 
         case 2:
-            
+			library.AddMagazine();
             break;
 
         case 3:
-            
+			library.AddNewspaper();
             break;
 
         case 4:
-			
+			library.Show();
             break;
 
         case 5:
-
+			library.Delete();
             break;
 
         case 7:
-            
+			library.SearchBook();
             break;
 
         case 11:
-			
+			library.Save();
             break; 
 		
 		case 12:
-			
+			library.Load();
             break;
 	}
 }

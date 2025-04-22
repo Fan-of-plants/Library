@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 /*rjvty*/
 
-namespace Library
+namespace LibraryApp
 {
     public class Library
     {
